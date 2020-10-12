@@ -17,16 +17,20 @@
 </body>
 </html>
 <script>
+    const speed=document.querySelector('.speed');
     const video=document.querySelector('.flex');
-    const speedBar=document.querySelector('.speedBar');
+    const speedBar=document.querySelector('.speed-bar');
     const min=0.4;
     const max=4;
-    speedBar.addEventListener('mousemove',setSpeed);
+    speed.addEventListener('mousemove',setSpeed);
     function setSpeed(e){
         const y=e.pageY-this.offsetTop;
         const percent=y/this.offsetHeight;
-        
-
+        const speedValue=(max-min)*percent+min;
+        console.log(percent,speedValue);
+        video.playbackRate=speedValue;
+        speedBar.style.height=Math.round(percent*100)+'%';
+        speedBar.textContent=speedValue.toFixed(2)+'x';
     }
 </script>
 <style>
@@ -37,6 +41,7 @@ body {
   align-items: center;
   min-height: 100vh;
   font-family: sans-serif;
+  font-size: small;
 }
 
 .wrapper {
